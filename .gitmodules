@@ -1,0 +1,6 @@
+[submodule "src/APE_Server"]
+	path = src/APE_Server
+	url = https://github.com/APE-Project/APE_Server.git
+[submodule "src/ApePubSub"]
+	path = src/ApePubSub
+	url = git@github.com:ptejada/ApePubSub.git
