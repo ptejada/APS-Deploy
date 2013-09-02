@@ -16,17 +16,21 @@ if [ $sources -ne 2 ]; then
 	echo "Some sources could not be located!"
 	echo "Fetching sources..."
 	
+	cd ../
+	
 	git submodule init
 	git submodule update
+	
+	cd ./src/
 else
 	echo "Fetching APE server updates..."
 	cd APE_Server
-	git pull
+	git pull origin master
 	cd ../
 
 	echo "Fetching ApePubSub updates..."
 	cd ApePubSub
-	git pull
+	git pull origin master
 	cd ../
 fi
 
@@ -34,7 +38,7 @@ echo "Building the APE Server from source..."
 echo "Please wait..."
 
 cd APE_Server
-status=$(./build.sh)
+status=$(./build.sh 2>&1)
 
 if [ $? -ne 0 ]; then
 	echo "!!!!!! An error occured building the APE Server !!!!!!!"
@@ -78,7 +82,7 @@ if [ -f "../../APScripts/main.ape.js" ]; then
 	cp -rf ./APE_Server/APScripts/framework ../../APScripts/
 else
 	#Copy the whole directory
-	cp - rf ./APE_Server/APScripts ../../
+	cp -rf ./APE_Server/APScripts ../../
 fi
 
 echo "Done!"
