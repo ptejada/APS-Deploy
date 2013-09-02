@@ -60,6 +60,10 @@ echo "Build complete!"
 #Ensure directories are created
 mkdir -p ../../bin/modules/
 
+#Prevents busy file by stopping the server before hand
+sh ../../stop
+sleep 2
+
 echo "Moving APE binary aped as ApeServer"
 cp ./bin/aped ../../bin/ApeServer
 
@@ -84,7 +88,7 @@ cp -rf ./APE_Server/modules ../../bin/
 if [ -f "../../APScripts/main.ape.js" ]; then
 	# Do a merge framework merge
 	cp -rf ./APE_Server/APScripts/framework ../../APScripts/
-        cp -rf ./APE_Server/APScripts/framework/main.ape.js ../../APScripts/
+        cp -rf ./APE_Server/APScripts/main.ape.js ../../APScripts/
 
 else
 	#Copy the whole directory
