@@ -1,0 +1,84 @@
+#!/bin/sh
+
+cd ./src/
+echo "Checking for sources...";
+sources=0
+if [ -d "APE_Server" ] && [ "$(ls -A APE_Server)" ]; then
+	sources=$[sources + 1]
+	echo "Found APE_Server sources!"
+fi
+if [ -d "ApePubSub" ]  && [ "$(ls -A ApePubSub)" ] ; then
+	sources=$[sources + 1]
+	echo "Found ApePubSub sources!"
+fi
+
+if [ $sources -ne 2 ]; then
+	echo "Some sources could not be located!"
+	echo "Fetching sources..."
+	
+	git submodule init
+	git submodule update
+else
+	echo "Fetching APE server updates..."
+	cd APE_Server
+	git pull
+	cd ../
+
+	echo "Fetching ApePubSub updates..."
+	cd ApePubSub
+	git pull
+	cd ../
+fi
+
+echo "Building the APE Server from source..."
+echo "Please wait..."
+
+cd APE_Server
+status=$(./build.sh)
+
+if [ $? -ne 0 ]; then
+	echo "!!!!!! An error occured building the APE Server !!!!!!!"
+	echo -n "Would you like to see the output? [y/n]: "
+
+	read answer
+
+	if [ "$answer" = "y" ]; then
+		echo "-------- Start of output ------"
+		echo $status
+		echo "--------- End of output -------"
+	fi
+	
+	echo "The update proccess has terminated"
+	exit 2 
+fi
+
+echo "Build complete!"
+
+echo "Moving APE binary aped as ApeServer"
+cp ./bin/aped ../../bin/ApeServer
+
+echo "Merging the modules/lib directory"
+cp -rf ./modules/lib ../../modules/
+
+if [ -f "../../bin/ape.conf" ]; then
+	echo "Coping configuration file..."
+	cp ./bin/ape.conf ../../bin/
+fi
+
+echo "The Server is in place"
+cd ../
+
+echo "Updating ApePubSub framework..."
+cd ApePubSub
+
+cp -rf ./APE_Server/modules ../../
+
+if [ -f "../../APScripts/main.ape.js" ]; then
+	# Do a merge framework merge
+	cp -rf ./APE_Server/APScripts/framework ../../APScripts/
+else
+	#Copy the whole directory
+	cp - rf ./APE_Server/APScripts ../../
+fi
+
+echo "Done!"

@@ -1,0 +1,29 @@
+#!/bin/sh
+
+APE_PATH=/home/ptejada/webapps/ape_prestine/bin/
+
+if [ ! -f ${APE_PATH}ape.pid ]; then
+	APE_PID=
+else
+	APE_PID=`cat ${APE_PATH}ape.pid`
+fi
+
+if [ ! $APE_PID ]; then
+
+	echo Starting APE server...
+	cd $APE_PATH
+	# echo APE server running...
+	./apePrestine > /dev/null
+
+else
+	if ! ps -p $APE_PID > /dev/null  
+	then
+		echo No proccess with PID $APE_PID.
+		echo Starting APE server...
+	        cd $APE_PATH
+       		# echo APE server running...
+	        ./apePrestine > /dev/null
+	else
+		echo APE server already running...
+	fi
+fi

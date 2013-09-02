@@ -1,0 +1,18 @@
+#!/bin/sh
+
+APE_PATH=/home/ptejada/webapps/ape_prestine/bin/
+
+if [ -f ${APE_PATH}ape.pid ]; then
+	APE_PID=`cat ${APE_PATH}ape.pid`
+else
+	APE_PID=
+fi
+
+if [ ! $APE_PID ]; then
+
+	echo APE Server is not running
+
+else
+	kill $APE_PID
+	echo Killing APE Server with PID $APE_PID
+fi

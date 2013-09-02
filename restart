@@ -1,0 +1,10 @@
+#!/bin/sh
+
+APE_PATH=/home/ptejada/webapps/ape_prestine/bin/
+
+cd ${APE_PATH}../
+
+./stop
+sleep 2
+./start
+echo \n
