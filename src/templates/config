@@ -6,7 +6,7 @@ uid {
 
 
 Server {
-	port = 2525
+	port = 6969
 	daemon = yes
 	ip_listen = 0.0.0.0
 	domain = auto
