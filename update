@@ -57,16 +57,20 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Build complete!"
+#Ensure directories are created
+mkdir -p ../../bin/modules/
 
 echo "Moving APE binary aped as ApeServer"
 cp ./bin/aped ../../bin/ApeServer
 
 echo "Merging the modules/lib directory"
-cp -rf ./modules/lib ../../modules/
+cp -rf ./modules/lib ../../bin/modules/lib
 
-if [ -f "../../bin/ape.conf" ]; then
-	echo "Coping configuration file..."
-	cp ./bin/ape.conf ../../bin/
+if [ ! -f "../../bin/ape.conf" ]; then
+	echo "Configuring..."
+	cd ../../
+	./config ignore
+	cd src/APE_Server
 fi
 
 echo "The Server is in place"
@@ -75,11 +79,13 @@ cd ../
 echo "Updating ApePubSub framework..."
 cd ApePubSub
 
-cp -rf ./APE_Server/modules ../../
+cp -rf ./APE_Server/modules ../../bin/
 
 if [ -f "../../APScripts/main.ape.js" ]; then
 	# Do a merge framework merge
 	cp -rf ./APE_Server/APScripts/framework ../../APScripts/
+        cp -rf ./APE_Server/APScripts/framework/main.ape.js ../../APScripts/
+
 else
 	#Copy the whole directory
 	cp -rf ./APE_Server/APScripts ../../

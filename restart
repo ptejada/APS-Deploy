@@ -1,10 +1,11 @@
 #!/bin/sh
 
-APE_PATH=/home/ptejada/webapps/ape_prestine/bin/
+APE_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-cd ${APE_PATH}../
+
+cd ${APE_PATH}
 
 ./stop
 sleep 2
 ./start
-echo \n
+echo 

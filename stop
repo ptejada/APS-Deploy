@@ -1,9 +1,9 @@
 #!/bin/sh
 
-APE_PATH=/home/ptejada/webapps/ape_prestine/bin/
+APE_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/bin/"
 
-if [ -f ${APE_PATH}ape.pid ]; then
-	APE_PID=`cat ${APE_PATH}ape.pid`
+if [ -f ${APE_PATH}running.pid ]; then
+	APE_PID=`cat ${APE_PATH}running.pid`
 else
 	APE_PID=
 fi
