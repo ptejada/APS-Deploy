@@ -1,0 +1,26 @@
+#!/bin/sh
+
+APE_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+if [ "$1" != "ignore" ]; then
+	echo "Please be advise this proccess will overwrite the following files:"
+	echo "	> $APE_PATH/bin/ape.conf"
+	echo "	> $APE_PATH/bin/debug.conf"
+	
+	echo -n "Would you like to coninue? [y/n]: "
+	read answer
+	if [ "$answer" != "y" ]; then
+		exit 2
+	fi	
+fi
+
+echo -n "Enter the port number the server: [6969] "
+read port
+if [ "$port" == "" ]; then
+	port=6969
+fi
+
+sed "s/6969/$port/g" <src/templates/config >bin/ape.conf
+sed "s/6969/$port/g" <src/templates/debug_config >bin/debug.conf
+
+echo "Done!"
