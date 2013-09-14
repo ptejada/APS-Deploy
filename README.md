@@ -32,6 +32,22 @@ Once the `update` command finishes you may start the server:
 
 Done! Your APE_Server + ApePubSub setup is up and running! It is recommended that you setup your subdomain wildcard for user sessions comparability, refer to [Using Sessions] (https://github.com/ptejada/ApePubSub/wiki/APE-Server-setup#using-session)
 
+### Updating
+
+Since all files and folders that might required manual updating are carefully configured to be ignored by git, updating your clone should be pretty smooth. A simple pull will do:
+
+```
+git pull
+```
+
+All customs scripts will live in the `APScript/` folder, just make sure not to add anything on the `APScript/framework/` folder as it gets overwritten on every `update` command. 
+
+To update all dependencies, APE_Server and ApePubSub, just run the `update` command:
+
+```
+./update
+```
+
 ### Commands
 <table>
 	<tr>
