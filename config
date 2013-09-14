@@ -3,9 +3,12 @@
 APE_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 if [ "$1" != "ignore" ]; then
+	echo 
 	echo "Please be advise this proccess will overwrite the following files:"
+	echo 
 	echo "	> $APE_PATH/bin/ape.conf"
 	echo "	> $APE_PATH/bin/debug.conf"
+	echo 
 	
 	echo -n "Would you like to coninue? [y/n]: "
 	read answer
@@ -14,7 +17,7 @@ if [ "$1" != "ignore" ]; then
 	fi	
 fi
 
-echo -n "Enter the port number the server: [6969] "
+echo -n "Enter the port number for the APE server [6969]: "
 read port
 if [ "$port" == "" ]; then
 	port=6969
@@ -22,5 +25,27 @@ fi
 
 sed "s/6969/$port/g" <src/templates/config >bin/ape.conf
 sed "s/6969/$port/g" <src/templates/debug_config >bin/debug.conf
+
+if [ -f "INSTANCE" ]; then
+        APE_INSTANCE=`cat ./INSTANCE`
+else
+        APE_INSTANCE="ApeServer"
+fi
+
+echo -n "Enter the instance name [$APE_INSTANCE]: "
+read instance
+
+if [ "$instance" != "" ]; then
+	echo $instance > INSTANCE
+
+	cd bin
+
+	#rename existing server
+	if [ -f "$APE_INSTANCE" ]; then
+		sh ../stop
+		sleep 2
+		mv $APE_INSTANCE $instance
+	fi
+fi
 
 echo "Done!"

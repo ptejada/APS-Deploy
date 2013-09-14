@@ -23,7 +23,7 @@ or
 ```
 sh update
 ```
-The first time you execute the `update` command you will be prompted to enter a port number. This port number will be the port the server will be bound to when running.
+The first time you execute the `update` command you will be prompted to enter a port number. This port number will be the port the server will be bound to when running. You will also be prompted to name the server instance, is basically the name that will show up in the OS process listing when the server is running.
 
 Once the `update` command finishes you may start the server:
 ```
@@ -60,7 +60,7 @@ Done! Your APE_Server + ApePubSub setup is up and running! It is recommended tha
 	</tr>
 	<tr>
 		<td>config</td>
-		<td>Allows you change the port number for the server</td>		
+		<td>Allows you to re-configure the server by setting the port number and instance name</td>		
 	</tr>
 	
 </table>

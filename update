@@ -1,4 +1,10 @@
 #!/bin/sh
+# Get the correct instance name
+if [ -f "INSTANCE" ]; then
+        APE_INSTANCE=`cat ./INSTANCE`
+else
+        APE_INSTANCE="ApeServer"
+fi
 
 cd ./src/
 echo "Checking for sources...";
@@ -65,7 +71,7 @@ sh ../../stop
 sleep 2
 
 echo "Moving APE binary aped as ApeServer"
-cp ./bin/aped ../../bin/ApeServer
+cp ./bin/aped ../../bin/${APE_INSTANCE}
 
 echo "Merging the modules/lib directory"
 cp -rf ./modules/lib ../../bin/modules/lib

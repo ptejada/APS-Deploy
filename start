@@ -2,6 +2,12 @@
 
 APE_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/bin/"
 
+if [ -f "INSTANCE" ]; then
+	APE_INSTANCE=`cat ./INSTANCE`
+else
+	APE_INSTANCE="ApeServer"
+fi
+
 if [ ! -f ${APE_PATH}running.pid ]; then
 	APE_PID=
 else
@@ -13,7 +19,7 @@ if [ ! $APE_PID ]; then
 	echo Starting APE server...
 	cd $APE_PATH
 	# echo APE server running...
-	./ApeServer
+	./${APE_INSTANCE}
 
 else
 	if ! ps -p $APE_PID > /dev/null  
@@ -22,7 +28,7 @@ else
 		echo Starting APE server...
 	        cd $APE_PATH
        		# echo APE server running...
-	        ./ApeServer
+	        ./${APE_INSTANCE}
 	else
 		echo APE server already running...
 	fi
