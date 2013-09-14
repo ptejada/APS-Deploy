@@ -30,7 +30,7 @@ Once the `update` command finishes you may start the server:
 ./start
 ```
 
-Done! Your APE_Server + ApePubSub setup is up and running! 
+Done! Your APE_Server + ApePubSub setup is up and running! It is recommended that you setup your subdomain wildcard for user sessions comparability, refer to [Using Sessions] (https://github.com/ptejada/ApePubSub/wiki/APE-Server-setup#using-session)
 
 ### Commands
 <table>
@@ -64,3 +64,8 @@ Done! Your APE_Server + ApePubSub setup is up and running!
 	</tr>
 	
 </table>
+
+### References
+
+- [ApePubSub API](https://github.com/ptejada/ApePubSub/wiki/API)
+- [APE Server API](http://www.ape-project.org/static/jsdocs/server/symbols/Ape.html)
