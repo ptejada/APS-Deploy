@@ -74,7 +74,7 @@ echo "Moving APE binary aped as ApeServer"
 cp ./bin/aped ../../bin/${APE_INSTANCE}
 
 echo "Merging the modules/lib directory"
-cp -rf ./modules/lib ../../bin/modules/lib
+cp -rf ./modules/lib ../../bin/modules/
 
 if [ ! -f "../../bin/ape.conf" ]; then
 	echo "Configuring..."
