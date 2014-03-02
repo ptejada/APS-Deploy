@@ -70,7 +70,7 @@ mkdir -p ../../bin/modules/
 sh ../../stop
 sleep 2
 
-echo "Moving APE binary aped as ApeServer"
+echo "Moving APE binary aped as ${APE_INSTANCE}"
 cp ./bin/aped ../../bin/${APE_INSTANCE}
 
 echo "Merging the modules/lib directory"
