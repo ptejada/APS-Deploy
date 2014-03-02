@@ -68,7 +68,7 @@ echo "Build complete!"
 mkdir -p ../../bin/modules/
 
 #Prevents busy file by stopping the server before hand
-sh ../../stop
+bash ../../stop
 sleep 2
 
 echo "Moving APE binary aped as ${APE_INSTANCE}"
