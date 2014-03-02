@@ -3,4 +3,4 @@
 	url = https://github.com/APE-Project/APE_Server.git
 [submodule "src/ApePubSub"]
 	path = src/ApePubSub
-	url = git@github.com:ptejada/ApePubSub.git
+	url = https://github.com/ptejada/ApePubSub.git 
