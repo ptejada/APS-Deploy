@@ -25,6 +25,10 @@ else
 	if ! ps -p $APE_PID > /dev/null  
 	then
 		echo No proccess with PID $APE_PID.
+		# Remove the PID file
+		rm -rf ${APE_PATH}running.pid
+		
+		# Start the server
 		echo Starting APE server...
 	        cd $APE_PATH
        		# echo APE server running...
